@@ -4,13 +4,15 @@ angular
         function($routeProvider,$locationProvider){
 
             $routeProvider.when('/',{
-                templateUrl: 'views/main.html'
+                templateUrl: 'views/main.html',
+                controller: 'homeController',
+                controllerAs: 'vm'
             })
 
             .when('/new',{
-                templateUrl: 'views/newItem.html'
-            })
-
-            $locationProvider.html5Mode(true);
+                templateUrl: 'views/newItem.html',
+                controller: 'newItemController',
+                controllerAs: 'vm'
+            });
         }
     ]);
