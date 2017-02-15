@@ -11,11 +11,26 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="Date" class="col-lg-2 control-label">Target Date</label>
+                    <div class="col-lg-10">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" >
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="vm.newEvent.date" placeholder="Select a Date" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker ng-model="vm.newEvent.date" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="textArea" class="col-lg-2 control-label">Content</label>
                     <div class="col-lg-10">
-                        <textarea class="form-control" style="resize:none" rows="5" id="content" ng-model="vm.newEvent.content" required></textarea>
+                        <textarea class="form-control" style="resize:none" rows="5" id="content" ng-model="vm.newEvent.content" placeholder="Content"required></textarea>
                     </div>
                 </div>
 
@@ -34,7 +49,7 @@
                 <div class="form-group">
                     <label for="location" class="col-lg-2 control-label">Location</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="location"  placeholder="Location">
+                        <input type="text" class="form-control" id="location"  gm-places-autocomplete placeholder="Enter a location">
                     </div>
                 </div>
 

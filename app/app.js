@@ -1,5 +1,5 @@
 angular
-    .module('app', ['ngRoute'])
+    .module('app', ['ngRoute','ui.bootstrap.datetimepicker','gm'])
     .config(['$routeProvider','$locationProvider',
         function($routeProvider,$locationProvider){
 

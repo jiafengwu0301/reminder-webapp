@@ -15,11 +15,14 @@ function homeController(){
 function newItemController($route,$location){
     var vm = this;
 
+    // vm.date=null;
+
     vm.newEvent = {
         'priority':'low',
         'check': 'n',
     };
     vm.newItem = newItem;
+
 
     function generateUUID() {
         var d = new Date().getTime();
