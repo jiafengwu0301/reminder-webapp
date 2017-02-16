@@ -1,7 +1,8 @@
 angular
     .module('app')
     .controller('homeController', homeController)
-    .controller('newItemController', newItemController);
+    .controller('newItemController', newItemController)
+    .controller('itemController',itemController);
 
 
 function homeController(){
@@ -62,6 +63,25 @@ function newItemController($route,$location,$scope){
         setList(allList);
         alert("New Event Created")
         $location.path('/');
+    }
+}
+
+function itemController($routeParams){
+    var vm = this;
+
+    vm.id = $routeParams.id;
+    vm.events = getList();
+    vm.currentItem = null;
+
+    // alert(vm.events[0]);
+    // alert(Object.keys(vm.events).length);
+
+    for (var i = 0; i < Object.keys(vm.events).length; i++){
+        // alert(vm.events[i].id);
+        if (vm.id === vm.events[i].id){
+            vm.currentItem = vm.events[i];
+            break;
+        }
     }
 }
 

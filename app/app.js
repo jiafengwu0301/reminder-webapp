@@ -13,6 +13,12 @@ angular
                 templateUrl: 'views/newItem.html',
                 controller: 'newItemController',
                 controllerAs: 'vm'
+            })
+
+            .when('/item/:id',{
+                templateUrl: 'views/item.html',
+                controller: 'itemController',
+                controllerAs: 'vm'
             });
         }
     ]);
