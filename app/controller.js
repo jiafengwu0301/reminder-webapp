@@ -41,7 +41,7 @@ function newItemController($route,$location,$scope){
         vm.lat = location.geometry.location.lat();
         vm.lng = location.geometry.location.lng();
         vm.address = location.formatted_address;
-      });
+    });
 
 
     function newItem(){
