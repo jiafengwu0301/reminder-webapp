@@ -17,10 +17,18 @@
                     </font>
                 </h4>
 
-                <hr class="half-rule"/>
+                <hr>
 
                 <p class="list-group-item-text">{{item.content}}</p>
-                <p class="list-group-item-text" ng-hide="!item.location"> <span class="glyphicon glyphicon-map-marker"></span> {{item.location}}</p>
+
+                <hr>
+
+                <font size='2'>
+                    <li class="list-group-item-text" type="none" ng-show="item.location!==undefined">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                        {{item.location.address}}
+                    </li>
+                </font>
             </a>
         </div>
     </div>

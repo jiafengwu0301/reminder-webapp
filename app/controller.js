@@ -12,10 +12,8 @@ function homeController(){
 }
 
 
-function newItemController($route,$location){
+function newItemController($route,$location,$scope){
     var vm = this;
-
-    // vm.date=null;
 
     vm.newEvent = {
         'priority':'low',
@@ -34,7 +32,30 @@ function newItemController($route,$location){
         return uuid;
     };
 
+    vm.lat = undefined;
+    vm.lng = undefined;
+    vm.address = undefined;
+
+    $scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+        var location = $scope.autocomplete.getPlace();
+        vm.lat = location.geometry.location.lat();
+        vm.lng = location.geometry.location.lng();
+        vm.address = location.formatted_address;
+      });
+
+
     function newItem(){
+
+        if (vm.lat && vm.lng && vm.address) {
+            var locationDatail = {
+                'lat': vm.lat,
+                'lng': vm.lng,
+                'address': vm.address,
+            }
+
+            vm.newEvent.location = locationDatail;
+        }
+
         vm.newEvent.id = generateUUID();
         var allList = getList();
         allList.push(vm.newEvent);
