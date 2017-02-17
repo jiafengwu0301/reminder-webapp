@@ -66,15 +66,16 @@ function newItemController($route,$location,$scope){
     }
 }
 
-function itemController($routeParams){
+function itemController($routeParams,$scope){
     var vm = this;
 
     vm.id = $routeParams.id;
     vm.events = getList();
     vm.currentItem = null;
-
-    // alert(vm.events[0]);
-    // alert(Object.keys(vm.events).length);
+    vm.editCheck = false;
+    vm.editItem = editItem;
+    vm.cancelEdit = cancelEdit;
+    vm.editEvent = null;
 
     for (var i = 0; i < Object.keys(vm.events).length; i++){
         // alert(vm.events[i].id);
@@ -82,6 +83,26 @@ function itemController($routeParams){
             vm.currentItem = vm.events[i];
             break;
         }
+    }
+
+    vm.lat = undefined;
+    vm.lng = undefined;
+    vm.address = undefined;
+
+    $scope.$on('gmPlacesAutocomplete::placeChanged', function(){
+        var location = $scope.autocomplete.getPlace();
+        vm.lat = location.geometry.location.lat();
+        vm.lng = location.geometry.location.lng();
+        vm.address = location.formatted_address;
+    });
+
+    function editItem(){
+        vm.editCheck=true;
+        vm.stringDate = new Date(vm.currentItem.date);
+    }
+
+    function cancelEdit(){
+        vm.editCheck=false;
     }
 }
 
