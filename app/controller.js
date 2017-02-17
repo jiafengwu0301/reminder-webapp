@@ -8,10 +8,10 @@ angular
 function homeController(){
     var vm = this;
 
+    // Get the JSON which contains all items
     vm.events = getList();
 
-}
-
+};
 
 function newItemController($route,$location,$scope){
     var vm = this;
@@ -22,7 +22,7 @@ function newItemController($route,$location,$scope){
     };
     vm.newItem = newItem;
 
-
+    // Generate the UUID for item
     function generateUUID() {
         var d = new Date().getTime();
         var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -44,18 +44,17 @@ function newItemController($route,$location,$scope){
         vm.address = location.formatted_address;
     });
 
-
+    // Create a new item
     function newItem(){
-
         if (vm.lat && vm.lng && vm.address) {
             var locationDatail = {
                 'lat': vm.lat,
                 'lng': vm.lng,
                 'address': vm.address,
-            }
+            };
 
             vm.newEvent.location = locationDatail;
-        }
+        };
 
         vm.newEvent.id = generateUUID();
         var allList = getList();
@@ -63,8 +62,8 @@ function newItemController($route,$location,$scope){
         setList(allList);
         alert("New Event Created")
         $location.path('/');
-    }
-}
+    };
+};
 
 function itemController($routeParams,$scope){
     var vm = this;
@@ -77,13 +76,14 @@ function itemController($routeParams,$scope){
     vm.cancelEdit = cancelEdit;
     vm.editEvent = null;
 
+    // Find the item by ID
     for (var i = 0; i < Object.keys(vm.events).length; i++){
         // alert(vm.events[i].id);
         if (vm.id === vm.events[i].id){
             vm.currentItem = vm.events[i];
             break;
-        }
-    }
+        };
+    };
 
     vm.lat = undefined;
     vm.lng = undefined;
@@ -96,25 +96,32 @@ function itemController($routeParams,$scope){
         vm.address = location.formatted_address;
     });
 
+    // Edit an item
     function editItem(){
         vm.editCheck=true;
         vm.stringDate = new Date(vm.currentItem.date);
-    }
 
+        var res = angular.equals(vm.currentItem,vm.editEvent);
+        if (!res){
+            //TODO:Update the item
+        };
+    };
+
+    // Cancel edit
     function cancelEdit(){
         vm.editCheck=false;
-    }
-}
+    };
+};
 
 //load and update JSON in localStorage
 function getList() {
         if(!localStorage.events){
             localStorage.events = JSON.stringify([]);
-        }
+        };
 
         return JSON.parse(localStorage.events);
-    }
+};
 
 function setList(item) {
     localStorage.events = JSON.stringify(item);
-}
+};
