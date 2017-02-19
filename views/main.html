@@ -2,6 +2,11 @@
     <div class="col-lg-12">
         <legend>All Events:</legend>
 
+        <div class="list-group" ng-if="vm.events==''">
+            <br>
+            <h4 style="text-align: center">Empty List</h4>
+        </div>
+
         <div class="list-group" ng-repeat="item in vm.events | orderBy:'date'">
             <a href="/#/item/{{item.id}}" class="list-group-item">
                 <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span> {{item.title}}

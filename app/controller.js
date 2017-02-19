@@ -10,7 +10,6 @@ function homeController(){
 
     // Get the JSON which contains all items
     vm.events = getList();
-
 };
 
 function newItemController($route,$location,$scope){
