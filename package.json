@@ -1,0 +1,23 @@
+{
+  "name": "reminder-webapp",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+      "express": "*",
+      "path":"*"
+  },
+  "main": "service.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiafengwu0301/reminder-webapp.git"
+  },
+  "author": "Jiafeng Wu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiafengwu0301/reminder-webapp/issues"
+  },
+  "homepage": "https://github.com/jiafengwu0301/reminder-webapp#readme"
+}

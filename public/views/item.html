@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="col-lg-12">
+        <form class="form-horizontal" ng-submit="vm.editItem()">
+            <fieldset ng-if="vm.editCheck===false">
+                <legend>Item:</legend>
+
+                <div class="list-group-item">
+
+                    <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span> {{vm.currentItem.title}}
+
+                        <font size="2" ng-show="vm.currentItem.check==='y'" style="float:right;">Done &nbsp
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </font>
+                        <font size="2" ng-show="vm.currentItem.check==='n'" style="float:right;">In Progress &nbsp
+                            <span class="glyphicon glyphicon-hourglass"></span>
+                        </font>
+                    </h4>
+
+                    <font size='2' ng-hide="!vm.currentItem.date">
+                        <span class="glyphicon glyphicon-time"></span> Target Date:  {{vm.currentItem.date | date:'yyyy-MM-dd hh:mm'}} <span style="float:right;">Priority: {{vm.currentItem.priority}}</span>
+                    </font>
+
+                    <hr>
+
+                    <p class="list-group-item-text">{{vm.currentItem.content}}</p>
+
+                    <hr>
+                    <a href="https://www.google.ca/maps/@{{vm.currentItem.location.lat}},{{vm.currentItem.location.lng}},16z" target="_blank">
+                        <font size='2'>
+                            <li class="list-group-item-text" type="none" ng-show="vm.currentItem.location!==undefined">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                {{vm.currentItem.location.address}}
+                            </li>
+                        </font>
+                    </a>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary btn-block">Edit</button>
+                        <hr>
+                        <a href="/#/" class="btn btn-warning btn-block">Back</a>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset ng-if="vm.editCheck===true">
+                <legend>Edit Item:</legend>
+                <div class="form-group">
+                    <label for="Title" class="col-lg-2 control-label">Title</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="title" ng-model="vm.editEvent.title" ng-init="vm.editEvent.title=vm.currentItem.title" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Date" class="col-lg-2 control-label">Target Date</label>
+                    <div class="col-lg-10">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" >
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="vm.editEvent.date" ng-init="vm.editEvent.date=vm.stringDate" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker ng-model="vm.editEvent.date" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="textArea" class="col-lg-2 control-label">Content</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" style="resize:none" rows="5" id="content" ng-model="vm.editEvent.content" ng-init="vm.editEvent.content=vm.currentItem.content" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="select" class="col-lg-2 control-label">Priority</label>
+                    <div class="col-lg-10">
+                        <select class="form-control" id="priority" ng-model="vm.editEvent.priority" ng-init="vm.editEvent.priority=vm.currentItem.priority" required>
+                          <option value="low" selected>Low</option>
+                          <option value="medium">Medium</option>
+                          <option value="high">High</option>
+                          <option value="unstoppable">Unstoppable</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location" class="col-lg-2 control-label">Location</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="location"  gm-places-autocomplete ng-model="autocomplete" placeholder="{{vm.currentItem.location.address}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary btn-block" ng-disabled="form.$invalid">Submit</button>
+                        <hr>
+                        <a href="/#/item/{{vm.id}}" class="btn btn-warning btn-block" ng-click='vm.cancelEdit()' >Cancel</a>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
